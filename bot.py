@@ -4,6 +4,8 @@ from discord import app_commands
 from commands.changepassword import register as register_changepassword
 from commands.myaccounts import register as register_myaccounts
 from commands.register import register as register_register
+from commands.setup import register as register_setup
+from commands.verifytest import register as register_verifytest
 from config import DISCORD_TOKEN, GUILD_ID
 from database.database import Database
 from utils.logger import logger
@@ -34,6 +36,16 @@ class RegistrationBot(discord.Client):
         )
 
         register_changepassword(
+            self.tree,
+            guild,
+        )
+
+        register_verifytest(
+            self.tree,
+            guild,
+        )
+
+        register_setup(
             self.tree,
             guild,
         )
