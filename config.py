@@ -37,3 +37,47 @@ BOT_ADMIN_ROLE = os.getenv(
 MINIMUM_DISCORD_ACCOUNT_AGE_DAYS = int(
     os.getenv("MINIMUM_DISCORD_ACCOUNT_AGE_DAYS", "7")
 )
+
+#
+# Community Configuration
+#
+
+SERVER_NAME = os.getenv(
+    "SERVER_NAME",
+    "Ninja Magic Wrath",
+)
+
+SERVER_DESCRIPTION = os.getenv(
+    "SERVER_DESCRIPTION",
+    "Welcome to the Ninja Magic AzerothCore community!",
+)
+
+REALM_NAME = os.getenv(
+    "REALM_NAME",
+    "Ninja Magic",
+)
+
+EXPANSION = os.getenv(
+    "EXPANSION",
+    "Wrath of the Lich King",
+)
+
+CLIENT_VERSION = os.getenv(
+    "CLIENT_VERSION",
+    "3.3.5a",
+)
+
+WEBSITE_URL = os.getenv(
+    "WEBSITE_URL",
+    "",
+)
+
+DISCORD_INVITE = os.getenv(
+    "DISCORD_INVITE",
+    "",
+)
+
+DOWNLOAD_URL = os.getenv(
+    "DOWNLOAD_URL",
+    "",
+)

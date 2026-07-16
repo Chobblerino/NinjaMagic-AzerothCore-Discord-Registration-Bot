@@ -6,11 +6,13 @@ The format is based on **Keep a Changelog** and this project follows **Semantic 
 
 ---
 
-## [Unreleased]
+## [1.1.0-rc1] - In Progress
 
 ### Added
-
-- Nothing yet.
+- Community configuration service.
+- Community configuration tests.
+- EmbedFactory.
+- Welcome embed.
 
 ## [1.0.0] - 2026-07-15
 
