@@ -81,3 +81,43 @@ DOWNLOAD_URL = os.getenv(
     "DOWNLOAD_URL",
     "",
 )
+
+
+#
+# Community Layout
+#
+
+INFORMATION_CATEGORY = os.getenv(
+    "INFORMATION_CATEGORY",
+    "Information",
+)
+
+GAME_CATEGORY = os.getenv(
+    "GAME_CATEGORY",
+    "Ninja Magic",
+)
+
+WELCOME_CHANNEL = os.getenv(
+    "WELCOME_CHANNEL",
+    "welcome",
+)
+
+RULES_CHANNEL = os.getenv(
+    "RULES_CHANNEL",
+    "rules",
+)
+
+VERIFY_CHANNEL = os.getenv(
+    "VERIFY_CHANNEL",
+    "verify",
+)
+
+REGISTRATION_CHANNEL = os.getenv(
+    "REGISTRATION_CHANNEL",
+    "registration",
+)
+
+SERVER_INFO_CHANNEL = os.getenv(
+    "SERVER_INFO_CHANNEL",
+    "server-info",
+)

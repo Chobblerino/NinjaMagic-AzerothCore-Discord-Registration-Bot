@@ -55,12 +55,12 @@ class RegistrationBot(discord.Client):
         logger.info("Synced %d command(s)", len(synced))
 
     async def on_ready(self):
-        logger.info("----------------------------------------")
-        logger.info("AC Registration Bot")
-        logger.info("Version : %s", VERSION)
-        logger.info("Logged in: %s", self.user)
+        logger.info("==================================================")
+        logger.info("🥷 Ninja Magic Community Bot")
+        logger.info("Version  : %s", VERSION)
+        logger.info("Bot      : %s", self.user)
         logger.info("Guild ID : %s", GUILD_ID)
-        logger.info("----------------------------------------")
+        logger.info("==================================================")
 
 
 bot = RegistrationBot()

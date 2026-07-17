@@ -1,31 +1,66 @@
 import discord
 
-from ui.embeds import EmbedFactory
-from ui.verify_view import VerifyView
+from services.community_config import community
+from services.guild_setup import GuildSetupService
+from services.message_setup import MessageSetupService
 
 
 class SetupService:
     @staticmethod
-    async def post_onboarding(
-        channel: discord.TextChannel,
+    async def run(
+        guild: discord.Guild,
     ):
-        await channel.send(
-            embed=EmbedFactory.welcome(),
+        #
+        # Categories
+        #
+
+        information = await GuildSetupService.get_or_create_category(
+            guild,
+            community.information_category,
         )
 
-        await channel.send(
-            embed=EmbedFactory.rules(),
+        game = await GuildSetupService.get_or_create_category(
+            guild,
+            community.game_category,
         )
 
-        await channel.send(
-            embed=EmbedFactory.verify(),
-            view=VerifyView(),
+        #
+        # Channels
+        #
+
+        welcome = await GuildSetupService.get_or_create_text_channel(
+            information,
+            community.welcome_channel,
         )
 
-        await channel.send(
-            embed=EmbedFactory.registration(),
+        rules = await GuildSetupService.get_or_create_text_channel(
+            information,
+            community.rules_channel,
         )
 
-        await channel.send(
-            embed=EmbedFactory.server_info(),
+        verify = await GuildSetupService.get_or_create_text_channel(
+            information,
+            community.verify_channel,
+        )
+
+        registration = await GuildSetupService.get_or_create_text_channel(
+            game,
+            community.registration_channel,
+        )
+
+        server_info = await GuildSetupService.get_or_create_text_channel(
+            game,
+            community.server_info_channel,
+        )
+
+        #
+        # Post onboarding
+        #
+
+        await MessageSetupService.populate(
+            welcome,
+            rules,
+            verify,
+            registration,
+            server_info,
         )
