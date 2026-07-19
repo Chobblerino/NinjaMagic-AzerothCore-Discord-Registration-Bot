@@ -74,7 +74,7 @@ def create_account(username, password):
     if "already exist" in message.lower():
         return (
             False,
-            "That username is already taken.\n\n" "Please choose another username.",
+            "That username is already taken.\n\nPlease choose another username.",
         )
 
     return False, message

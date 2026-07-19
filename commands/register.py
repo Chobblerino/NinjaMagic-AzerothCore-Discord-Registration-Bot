@@ -4,7 +4,10 @@ from discord import app_commands
 from ui.register_modal import RegisterModal
 
 
-def register(tree: app_commands.CommandTree, guild: discord.Object):
+def register(
+    tree: app_commands.CommandTree,
+    guild: discord.Object,
+) -> None:
 
     @tree.command(
         name="register",
@@ -12,4 +15,6 @@ def register(tree: app_commands.CommandTree, guild: discord.Object):
         guild=guild,
     )
     async def register_command(interaction: discord.Interaction):
-        await interaction.response.send_modal(RegisterModal())
+        await interaction.response.send_modal(
+            RegisterModal(),
+        )

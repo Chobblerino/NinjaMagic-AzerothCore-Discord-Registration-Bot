@@ -6,7 +6,10 @@ from ui.account_select import AccountSelectView
 from ui.change_password_modal import ChangePasswordModal
 
 
-def register(tree: app_commands.CommandTree, guild: discord.Object):
+def register(
+    tree: app_commands.CommandTree,
+    guild: discord.Object,
+) -> None:
 
     @tree.command(
         name="changepassword",
@@ -25,9 +28,7 @@ def register(tree: app_commands.CommandTree, guild: discord.Object):
             return
 
         if len(accounts) == 1:
-            await interaction.response.send_modal(
-                ChangePasswordModal(accounts[0])
-            )
+            await interaction.response.send_modal(ChangePasswordModal(accounts[0]))
             return
 
         await interaction.response.send_message(

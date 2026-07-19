@@ -39,11 +39,7 @@ def validate_username(username):
 
 
 def validate_password(password):
-    if not (
-        MIN_PASSWORD_LENGTH
-        <= len(password)
-        <= MAX_PASSWORD_LENGTH
-    ):
+    if not (MIN_PASSWORD_LENGTH <= len(password) <= MAX_PASSWORD_LENGTH):
         return (
             False,
             f"Password must be between "

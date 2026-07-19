@@ -2,7 +2,9 @@ import discord
 from discord import app_commands
 
 from commands.changepassword import register as register_changepassword
+from commands.help import register as register_help
 from commands.myaccounts import register as register_myaccounts
+from commands.ping import register as register_ping
 from commands.register import register as register_register
 from commands.setup import register as register_setup
 from commands.verifytest import register as register_verifytest
@@ -50,6 +52,15 @@ class RegistrationBot(discord.Client):
             guild,
         )
 
+        register_help(
+            self.tree,
+            guild,
+        )
+
+        register_ping(
+            self.tree,
+            guild,
+        )
         synced = await self.tree.sync(guild=guild)
 
         logger.info("Synced %d command(s)", len(synced))

@@ -5,7 +5,11 @@ from ui.embeds import EmbedFactory
 from ui.verify_view import VerifyView
 
 
-def register(tree, guild):
+def register(
+    tree: app_commands.CommandTree,
+    guild: discord.Object,
+) -> None:
+
     @tree.command(
         name="verifytest",
         description="Post the verification message.",

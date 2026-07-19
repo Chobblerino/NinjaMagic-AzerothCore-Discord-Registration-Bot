@@ -1,49 +1,76 @@
 # Ninja Magic AzerothCore Discord Registration Bot
 
-```{=html}
 <p align="center">
   <img src="docs/images/banner.png"
        alt="Ninja Magic AzerothCore Discord Registration Bot"
        width="900">
 </p>
-```
-> A secure Discord bot that allows players to create and manage their
-> own AzerothCore accounts without requiring GM intervention.
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![Python](https://img.shields.io/badge/python-3.11+-blue)
+
+<p align="center">
+A modern Discord bot providing secure self-service account management for AzerothCore servers.
+</p>
+
+<p align="center">
+
+![Version](https://img.shields.io/badge/version-1.1.0-blue)
+![Python](https://img.shields.io/badge/python-3.14+-blue)
+![Discord.py](https://img.shields.io/badge/discord.py-2.x-5865F2)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-Stable-brightgreen)
+
+</p>
+
 ------------------------------------------------------------------------
+
 
 ## Quick Start
 
-> **Estimated installation time:** 15--30 minutes.
+> **Estimated installation time:** 15–30 minutes.
 
-``` bash
+```bash
 git clone <repository-url>
 cd NinjaMagic-AzerothCore-Discord-Registration-Bot
+
 python3 -m venv venv
 source venv/bin/activate
+
 pip install --upgrade pip
 pip install -r requirements.txt
+
 cp .env.example .env
+
 python bot.py
 ```
+
+------------------------------------------------------------------------
+
+
 ## Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
 - [Architecture](#architecture)
+- [Project Structure](#project-structure)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Discord Setup](#discord-setup)
+- [AzerothCore Setup](#azerothcore-setup)
+- [Database Setup](#database-setup)
 - [Configuration](#configuration)
 - [Running the Bot](#running-the-bot)
+- [Production Deployment](#production-deployment)
 - [Commands](#commands)
+- [Testing](#testing)
+- [Development Workflow](#development-workflow)
 - [Logging](#logging)
 - [Troubleshooting](#troubleshooting)
+- [FAQ](#faq)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
+- [Security](#security)
 - [License](#license)
+- [Acknowledgements](#acknowledgements)
+
 ------------------------------------------------------------------------
 
 # Overview
@@ -74,6 +101,16 @@ account limits.
 -   Multiple linked accounts
 -   Automatic stale account cleanup
 
+## Discord User Interface
+
+- Interactive `/help`
+- Rich Discord embeds
+- Buttons and Views
+- Registration modal
+- Password confirmation
+- Ephemeral responses
+- Modern slash command interface
+
 ## Security
 
 -   Verified role requirement
@@ -97,35 +134,58 @@ account limits.
 
 # Architecture
 
-``` text
 Discord
     │
     ▼
 Slash Commands
     │
     ▼
-Discord UI (Modals / Select Menus)
+Commands
     │
     ▼
-Service Layer
- ┌──┴──────────────┐
- ▼                 ▼
-SQLite        AzerothCore SOAP
-                   │
-                   ▼
-        AzerothCore Auth Database
+UI Layer
+(Embeds • Views • Modals)
+    │
+    ▼
+Services
+ ┌──────────────┴──────────────┐
+ ▼                             ▼
+SQLite                 AzerothCore SOAP
+                                │
+                                ▼
+                     AzerothCore Auth Database
+
+------------------------------------------------------------------------
+
+# Project Structure
+
+```text
+bot.py                  Entry point
+commands/               Slash commands
+services/               Business logic
+ui/                     Embeds, buttons, modals and views
+database/               SQLite database layer
+constants/              Shared constants
+utils/                  Helper utilities
+tests/                  Unit tests
+docs/                   Project documentation
+logs/                   Runtime logs
 ```
 
+The project follows a layered architecture that keeps Discord interaction,
+business logic and data access separate.
+
+This makes the project easier to maintain, test and extend.
 ------------------------------------------------------------------------
 
 # Requirements
 
--   Debian 13 (tested)
--   Python 3.11+
--   AzerothCore
--   MySQL 8+
--   Discord.py 2.x
--   Git
+- Debian 13 (tested)
+- Python 3.14+
+- AzerothCore
+- MySQL 8+
+- Discord.py 2.x
+- Git
 
 ------------------------------------------------------------------------
 
@@ -238,27 +298,88 @@ The `.env` file contains settings such as:
 
 # Running the Bot
 
-Development:
+## Development
 
-``` bash
-python bot.py
+After activating the virtual environment:
+
+```bash
+bot-start
 ```
 
-Production:
+Useful helper commands:
 
-Create a `systemd` service so the bot starts automatically after boot.
+```bash
+bot-status
+bot-log
+bot-restart
+bot-stop
+```
+
+## Production
+
+Deploy the bot using a `systemd` service so it starts automatically after boot.
 
 ------------------------------------------------------------------------
 
 # Commands
 
-  Command             Description
-  ------------------- ------------------------------------------
-  `/register`         Create a new AzerothCore account
-  `/myaccounts`       List linked accounts
-  `/changepassword`   Change the password for a linked account
+| Command           | Description                      |
+| ----------------- | -------------------------------- |
+| `/help`           | Interactive help centre          |
+| `/ping`           | Check bot status                 |
+| `/register`       | Create an account                |
+| `/myaccounts`     | View linked accounts             |
+| `/changepassword` | Change a linked account password |
+| `/setup`          | Configure the bot                |
+| `/verifytest`     | Test the verification workflow   |
+
 
 ------------------------------------------------------------------------
+
+# Testing
+
+Before committing changes, run:
+
+```bash
+ruff check .
+pytest
+```
+
+New features should include tests where practical to help maintain reliability.
+
+------------------------------------------------------------------------
+
+# Development Workflow
+
+The project follows a layered architecture:
+
+```text
+Discord
+   │
+Commands
+   │
+UI
+   │
+Services
+   │
+Database / SOAP
+```
+
+General development guidelines:
+
+- Run `ruff check .` before testing.
+- Keep business logic inside `services/`.
+- Keep Discord presentation inside `ui/`.
+- Keep slash commands lightweight.
+- Write reusable code whenever possible.
+
+------------------------------------------------------------------------
+
+# Production Deployment
+
+For production deployments it is recommended to run the bot as a
+`systemd` service so it starts automatically after boot and restarts if
+it exits unexpectedly.
 
 # Logging
 
@@ -289,20 +410,81 @@ Common issues:
 
 ------------------------------------------------------------------------
 
+---
+
+# FAQ
+
+### Slash commands do not appear
+
+Ensure the bot has been invited with the
+`applications.commands` scope and allow Discord a few minutes to
+synchronise commands.
+
+### SOAP connection failed
+
+Verify the SOAP configuration in AzerothCore and ensure the configured
+port is reachable from the machine running the bot.
+
+### Registration failed
+
+Check:
+
+- Discord role requirements
+- Account age policy
+- Username and password validation
+- SOAP connectivity
+
+### MySQL connection issues
+
+Verify the configured database credentials and ensure the bot has access
+to the AzerothCore authentication database.
+
+------------------------------------------------------------------------
+
 # Roadmap
 
-Planned after v1.0:
+## Version 1.2
 
--   Account deletion
--   Additional administrator commands
--   Richer audit reporting
--   Improved SOAP error handling
+Planned features include:
+
+- Rich `/myaccounts` interface
+- Character browser
+- Improved account management
+- Enhanced administrator commands
+- Additional verification options
+- More comprehensive audit reporting
+
+Longer term goals:
+
+- Multi-server support
+- Localization
+- Plugin architecture
+- Web dashboard
 
 ------------------------------------------------------------------------
 
 # Contributing
 
 Issues and pull requests are welcome.
+
+------------------------------------------------------------------------
+
+# Security
+
+The bot is designed with security in mind.
+
+Features include:
+
+- Discord role verification
+- Discord account age requirements
+- Username validation
+- Password confirmation
+- Account ownership verification
+- SQLite account linking
+- Configurable security policies
+
+Passwords are processed through the AzerothCore SOAP interface and are
+not stored by the Discord bot.
 
 ------------------------------------------------------------------------
 
@@ -316,6 +498,13 @@ See the [LICENSE](LICENSE) file for details.
 
 # Acknowledgements
 
--   AzerothCore
--   Discord.py
--   The AzerothCore community
+Special thanks to:
+
+- AzerothCore
+- Discord.py
+- Python
+- SQLite
+- The AzerothCore community
+
+This project has also benefited from AI-assisted development during its
+design, documentation and implementation.
