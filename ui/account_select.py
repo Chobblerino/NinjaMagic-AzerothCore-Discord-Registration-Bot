@@ -32,6 +32,4 @@ class AccountSelectView(discord.ui.View):
     def __init__(self, accounts):
         super().__init__()
 
-        self.add_item(
-            AccountSelect(accounts)
-        )
+        self.add_item(AccountSelect(accounts))

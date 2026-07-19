@@ -2,8 +2,12 @@ import discord
 from discord import app_commands
 
 from commands.changepassword import register as register_changepassword
+from commands.help import register as register_help
 from commands.myaccounts import register as register_myaccounts
+from commands.ping import register as register_ping
 from commands.register import register as register_register
+from commands.setup import register as register_setup
+from commands.verifytest import register as register_verifytest
 from config import DISCORD_TOKEN, GUILD_ID
 from database.database import Database
 from utils.logger import logger
@@ -38,17 +42,36 @@ class RegistrationBot(discord.Client):
             guild,
         )
 
+        register_verifytest(
+            self.tree,
+            guild,
+        )
+
+        register_setup(
+            self.tree,
+            guild,
+        )
+
+        register_help(
+            self.tree,
+            guild,
+        )
+
+        register_ping(
+            self.tree,
+            guild,
+        )
         synced = await self.tree.sync(guild=guild)
 
         logger.info("Synced %d command(s)", len(synced))
 
     async def on_ready(self):
-        logger.info("----------------------------------------")
-        logger.info("AC Registration Bot")
-        logger.info("Version : %s", VERSION)
-        logger.info("Logged in: %s", self.user)
+        logger.info("==================================================")
+        logger.info("🥷 Ninja Magic Community Bot")
+        logger.info("Version  : %s", VERSION)
+        logger.info("Bot      : %s", self.user)
         logger.info("Guild ID : %s", GUILD_ID)
-        logger.info("----------------------------------------")
+        logger.info("==================================================")
 
 
 bot = RegistrationBot()

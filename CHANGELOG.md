@@ -6,11 +6,52 @@ The format is based on **Keep a Changelog** and this project follows **Semantic 
 
 ---
 
-## [Unreleased]
+## [1.1.0] - 2026-07-19
 
 ### Added
 
-- Nothing yet.
+- Interactive `/help` command with button navigation.
+- Rich Discord embed framework.
+- Dedicated UI layer (`ui/`) for embeds, views and modals.
+- Registration modal with password confirmation.
+- Registration success and error embeds.
+- Community configuration service.
+- Community configuration tests.
+- EmbedFactory.
+- Welcome embed.
+- Expanded project documentation.
+- Development workflow documentation.
+- Testing documentation.
+- FAQ section in the README.
+- Production deployment documentation.
+
+### Changed
+
+- Refactored the project into a layered architecture.
+- Improved separation between Discord commands, UI components and business logic.
+- Expanded the README with installation, deployment and development guidance.
+- Modernised project documentation.
+- Updated supported Python version to 3.14.
+
+### Improved
+
+- Interactive help experience.
+- Registration workflow.
+- Embed consistency throughout the project.
+- Repository organisation.
+- Documentation quality and readability.
+
+### Fixed
+
+- Password confirmation validation during registration.
+- Minor UI and embed formatting issues.
+- Various documentation inconsistencies.
+
+### Removed
+
+- Registration command cooldown.
+
+---
 
 ## [1.0.0] - 2026-07-15
 
@@ -47,35 +88,3 @@ The format is based on **Keep a Changelog** and this project follows **Semantic 
 - Configurable maximum linked accounts.
 - Reserved username protection.
 - Validation of usernames and passwords before account creation.
-
----
-
-## [1.0.0-rc1] - 2026-07-15
-
-### Added
-
-- First public Release Candidate.
-- Complete registration workflow.
-- Password management.
-- Multi-account support.
-- Registration policy framework.
-- SQLite account linking.
-- Logging framework.
-- Repository documentation.
-
-### Fixed
-
-- SQLite account linking.
-- Case-sensitive account verification.
-- Password change account lookup.
-- SOAP response handling.
-- Registration logging.
-- Dependency cleanup.
-- Logging configuration.
-
-### Changed
-
-- Improved project architecture.
-- Simplified dependency management.
-- Centralised configuration.
-- Improved documentation.

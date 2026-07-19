@@ -4,7 +4,10 @@ from discord import app_commands
 from services.accounts import get_linked_accounts
 
 
-def register(tree: app_commands.CommandTree, guild: discord.Object):
+def register(
+    tree: app_commands.CommandTree,
+    guild: discord.Object,
+) -> None:
 
     @tree.command(
         name="myaccounts",
